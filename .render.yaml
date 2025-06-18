@@ -3,5 +3,4 @@ services:
     name: acoes-internacionais
     env: docker
     plan: free
-    dockerfilePath: ./Dockerfile
     autoDeploy: true
