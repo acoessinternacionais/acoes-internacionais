@@ -1,3 +1,3 @@
 <?php
-include("frontend/home.php");
+include('home.php');
 ?>
