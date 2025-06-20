@@ -20,7 +20,7 @@
 async function buscarAtivo() {
   const ticker = document.getElementById('ticker-input').value.trim().toUpperCase();
   if (!ticker) return alert('Informe um ticker válido');
-  const apikey = 'SUA_API_KEY';
+  const apikey = '9OCLX5BXKL5QST0O';
   const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&outputsize=compact&apikey=${apikey}`;
 
   try {
