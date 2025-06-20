@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ações Internacionais</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <h1>Esta é a Home do site Ações Internacionais</h1>
 <p>Em breve mais funcionalidades estarão disponíveis aqui.</p>
 
@@ -46,3 +55,5 @@ async function buscarAtivo() {
   }
 }
 </script>
+</body>
+</html>
