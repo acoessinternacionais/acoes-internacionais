@@ -1,4 +1,5 @@
-// Importa e inicializa o Firebase
+
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDVGf9IPhghtvmqEh9VRjXePY9FWgDDcrA",
   authDomain: "acoes-internacionais.firebaseapp.com",
@@ -11,26 +12,25 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Enviar mensagem
 function enviarMensagem() {
-  const input = document.getElementById("mensagem");
-  const texto = input.value.trim();
-  if (texto === "") return;
-
-  db.collection("chat").add({
-    texto,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  });
-  input.value = "";
+  const msg = document.getElementById("mensagem").value;
+  if (msg.trim()) {
+    db.collection("mensagens").add({
+      texto: msg,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    document.getElementById("mensagem").value = "";
+  }
 }
 
-// Receber mensagens
-db.collection("chat").orderBy("timestamp").onSnapshot(snapshot => {
-  const painel = document.getElementById("painel-chat");
-  painel.innerHTML = "";
-  snapshot.forEach(doc => {
-    const msg = document.createElement("div");
-    msg.textContent = doc.data().texto;
-    painel.appendChild(msg);
+db.collection("mensagens").orderBy("timestamp")
+  .onSnapshot(snapshot => {
+    const painel = document.getElementById("painel-chat");
+    painel.innerHTML = "<strong>Mensagens:</strong><br>";
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.texto) {
+        painel.innerHTML += `<div>${data.texto}</div>`;
+      }
+    });
   });
-});
