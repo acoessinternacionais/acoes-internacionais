@@ -1,0 +1,19 @@
+name: Deploy automático para Render
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Dar permissão ao script
+        run: chmod +x deploy.sh
+
+      - name: Executar o script de deploy
+        run: ./deploy.sh
