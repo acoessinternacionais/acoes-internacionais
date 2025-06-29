@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const empresa = "Petrobras";
-  const url = `https://newsdata.io/api/1/news?apikey=pub_36712bff61e9bcd6b5958a0fe81abbd5fb5b3&q=${empresa}&language=pt`;
+  const url = `https://newsdata.io/api/1/news?apikey=pub_36712bff61e9bcd6b5958a0fe81abbd5fb5b3&q=Petrobras&language=pt`;
 
   fetch(url)
     .then(response => response.json())
