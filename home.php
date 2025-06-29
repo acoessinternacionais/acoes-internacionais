@@ -43,6 +43,16 @@
     </aside>
   </main>
 
+<div id="carrossel-noticias" class="carrossel-container">
+  <h2>Notícias Recentes</h2>
+  <div class="carrossel" id="noticiasCarrossel">
+    <div class="noticia">Carregando notícias...</div>
+  </div>
+</div>
+
+<!-- Script para buscar as notícias -->
+<script src="/js/noticias.js"></script>
+   
   <script src="script.js"></script>
 </body>
 </html>
