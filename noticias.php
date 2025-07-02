@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Notícias Recentes</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="/js/noticias.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/noticias.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -12,19 +12,19 @@
         <a href="login.php" class="login-btn">Login</a>
     </header>
 
-    <main class="container">
-        <section class="main-content">
+    <div class="container">
+        <div class="content">
             <h2>Notícias Recentes</h2>
             <ul id="lista-noticias">
                 <li>Carregando notícias...</li>
             </ul>
-        </section>
+        </div>
 
-        <aside class="sidebar">
+        <div class="sidebar">
             <div class="ads">ADS</div>
             <div class="chat-box">Chat</div>
             <div class="noticias-box">Notícias</div>
-        </aside>
-    </main>
+        </div>
+    </div>
 </body>
 </html>
