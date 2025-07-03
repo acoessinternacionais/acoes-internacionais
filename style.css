@@ -72,3 +72,54 @@
     min-width: 95%;
   }
 }
+
+body {
+  font-family: 'Impact', sans-serif;
+  background-color: #f0f8ff; /* azul bebê claro */
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #002147;
+}
+
+a {
+  color: #0047ab;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+}
+
+.content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.sidebar {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #003366;
+}
+
+.login-btn {
+  font-size: 16px;
+  margin-left: 20px;
+}
