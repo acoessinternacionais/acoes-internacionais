@@ -92,3 +92,9 @@ async function carregarGrafico(ticker) {
     }
   });
 }
+document.getElementById('periodo').addEventListener('change', () => {
+  if (chart) {
+    const lastTicker = chart.data.datasets[0].label.split(" ")[2];
+    carregarGrafico(lastTicker);
+  }
+});
