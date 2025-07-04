@@ -1,4 +1,4 @@
-const API_KEY = 'SUA_API_KEY'; // Substitua pela sua chave real da Alpha Vantage
+const API_KEY = 'Y03SX8XFM7QQ56RG'; // Substitua pela sua chave real da Alpha Vantage
 const ativos = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'ITUB', 'PETR4.SA']; // Exemplo: ações EUA + Brasil
 
 // Atualiza os dados a cada 60 segundos
@@ -38,4 +38,57 @@ async function buscarAtivos() {
   }));
 
   tabela.innerHTML = rows.join('');
+}
+let chart; // gráfico global
+
+document.addEventListener('click', function (e) {
+  const target = e.target.closest('tr');
+  if (target && target.cells.length && target.cells[0].innerText !== 'Ticker') {
+    const ticker = target.cells[0].innerText;
+    carregarGrafico(ticker);
+  }
+});
+
+async function carregarGrafico(ticker) {
+  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${API_KEY}`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  const timeseries = data['Time Series (Daily)'];
+  if (!timeseries) {
+    alert("Erro ao carregar gráfico.");
+    return;
+  }
+
+  const labels = Object.keys(timeseries).slice(0, 10).reverse(); // últimos 10 dias
+  const valores = labels.map(dia => parseFloat(timeseries[dia]['4. close']));
+
+  const ctx = document.getElementById('grafico-preco').getContext('2d');
+
+  // Remove gráfico antigo
+  if (chart) chart.destroy();
+
+  // Cria novo gráfico
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: `Preço de ${ticker}`,
+        data: valores,
+        borderColor: 'rgba(54, 162, 235, 1)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        fill: true,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
 }
