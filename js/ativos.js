@@ -1,10 +1,14 @@
-const API_KEY = 'Y03SX8XFM7QQ56RG'; // Substitua pela sua chave real da Alpha Vantage
-const ativos = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'ITUB', 'PETR4.SA']; // Exemplo: ações EUA + Brasil
+const API_KEY = 'Y03SX8XFM7QQ56RG'; // Substitua pela sua chave da Alpha Vantage
+const ativos = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'PETR4.SA', 'VALE3.SA'];
 
-// Atualiza os dados a cada 60 segundos
+let chart;
+let periodoAtual = 'daily'; // padrão: últimos dias
+
+// Atualiza tabela a cada 60 segundos
 setInterval(buscarAtivos, 60000);
-buscarAtivos(); // primeira chamada ao carregar a página
+buscarAtivos();
 
+// Preenche a tabela com dados em tempo real
 async function buscarAtivos() {
   const tabela = document.getElementById('tabela-ativos');
   tabela.innerHTML = '<tr><td colspan="5">Carregando dados...</td></tr>';
@@ -22,15 +26,15 @@ async function buscarAtivos() {
 
       const preco = parseFloat(quote['05. price']).toFixed(2);
       const variacao = parseFloat(quote['09. change']).toFixed(2);
-      const pct = parseFloat(quote['10. change percent']).toFixed(2);
+      const pct = quote['10. change percent'];
 
       return `
-        <tr>
+        <tr data-ticker="${ticker}">
           <td>${ticker}</td>
           <td>${ticker}</td>
           <td>R$ ${preco}</td>
           <td>--</td>
-          <td style="color:${variacao >= 0 ? 'green' : 'red'}">${variacao} (${pct}%)</td>
+          <td style="color:${variacao >= 0 ? 'green' : 'red'}">${variacao} (${pct})</td>
         </tr>`;
     } catch (err) {
       return `<tr><td>${ticker}</td><td>-</td><td>Erro</td><td>--</td><td>--</td></tr>`;
@@ -39,42 +43,49 @@ async function buscarAtivos() {
 
   tabela.innerHTML = rows.join('');
 }
-let chart; // gráfico global
 
+// Detecta clique em uma linha da tabela
 document.addEventListener('click', function (e) {
-  const target = e.target.closest('tr');
-  if (target && target.cells.length && target.cells[0].innerText !== 'Ticker') {
-    const ticker = target.cells[0].innerText;
-    carregarGrafico(ticker);
+  const linha = e.target.closest('tr[data-ticker]');
+  if (linha) {
+    const ticker = linha.dataset.ticker;
+    carregarGrafico(ticker, periodoAtual);
   }
 });
 
-async function carregarGrafico(ticker) {
-  const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${API_KEY}`;
+// Carrega gráfico com base no ticker e período
+async function carregarGrafico(ticker, periodo) {
+  let funcao = '';
+  if (periodo === 'daily') funcao = 'TIME_SERIES_DAILY';
+  else if (periodo === 'weekly') funcao = 'TIME_SERIES_WEEKLY';
+  else if (periodo === 'monthly') funcao = 'TIME_SERIES_MONTHLY';
+
+  const url = `https://www.alphavantage.co/query?function=${funcao}&symbol=${ticker}&apikey=${API_KEY}`;
   const response = await fetch(url);
   const data = await response.json();
 
-  const timeseries = data['Time Series (Daily)'];
-  if (!timeseries) {
-    alert("Erro ao carregar gráfico.");
+  let timeserie;
+  if (periodo === 'daily') timeserie = data['Time Series (Daily)'];
+  if (periodo === 'weekly') timeserie = data['Weekly Time Series'];
+  if (periodo === 'monthly') timeserie = data['Monthly Time Series'];
+
+  if (!timeserie) {
+    alert('Erro ao carregar dados do gráfico.');
     return;
   }
 
-  const labels = Object.keys(timeseries).slice(0, 10).reverse(); // últimos 10 dias
-  const valores = labels.map(dia => parseFloat(timeseries[dia]['4. close']));
+  const labels = Object.keys(timeserie).slice(0, 12).reverse();
+  const valores = labels.map(dia => parseFloat(timeserie[dia]['4. close']));
 
   const ctx = document.getElementById('grafico-preco').getContext('2d');
-
-  // Remove gráfico antigo
   if (chart) chart.destroy();
 
-  // Cria novo gráfico
   chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels,
       datasets: [{
-        label: `Preço de ${ticker}`,
+        label: `Preço de ${ticker} (${periodo})`,
         data: valores,
         borderColor: 'rgba(54, 162, 235, 1)',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -84,17 +95,22 @@ async function carregarGrafico(ticker) {
     },
     options: {
       responsive: true,
-      scales: {
-        y: {
-          beginAtZero: false
+      plugins: {
+        title: {
+          display: true,
+          text: `Histórico de ${ticker} - ${periodo.toUpperCase()}`
         }
       }
     }
   });
 }
-document.getElementById('periodo').addEventListener('change', () => {
-  if (chart) {
-    const lastTicker = chart.data.datasets[0].label.split(" ")[2];
-    carregarGrafico(lastTicker);
+
+// Muda o período do gráfico
+document.getElementById('filtro-periodo').addEventListener('change', function () {
+  periodoAtual = this.value;
+  const ativoSelecionado = document.querySelector('tr[data-ticker].ativo-selecionado');
+  if (ativoSelecionado) {
+    const ticker = ativoSelecionado.dataset.ticker;
+    carregarGrafico(ticker, periodoAtual);
   }
 });
