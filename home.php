@@ -40,6 +40,15 @@
         <canvas id="grafico-preco" width="400" height="200"></canvas>
       </div>
     </section>
+<div style="margin: 10px 0;">
+  <label for="filtro-periodo">Período:</label>
+  <select id="filtro-periodo">
+    <option value="daily" selected>Diário</option>
+    <option value="weekly">Semanal</option>
+    <option value="monthly">Mensal</option>
+  </select>
+</div>
+<canvas id="grafico-preco" height="100"></canvas>
 
     <!-- Sidebar: Chat, Bio, Notícias -->
     <aside class="sidebar">
