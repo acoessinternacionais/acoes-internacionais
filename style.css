@@ -6,167 +6,186 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f3f6f9;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
   color: #333;
-  line-height: 1.6;
-  padding: 16px;
+  line-height: 1.5;
+  padding: 20px;
 }
 
-/* Fonte principal para títulos */
-h1, h2, h3 {
-  font-family: Impact, sans-serif;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-}
-
-/* Seções */
-section {
-  margin-bottom: 32px;
-}
-
-.titulo-secao {
-  font-size: 1.8em;
-  border-left: 5px solid #00aaff;
-  padding-left: 12px;
-  margin-bottom: 16px;
-}
-
-/* Botões */
-button, .botao {
-  background-color: #a0d8ef;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover, .botao:hover {
-  background-color: #7ecdf0;
-}
-
-/* Indicadores de variação */
-.variacao-positiva {
-  color: #28a745; /* verde */
-}
-
-.variacao-negativa {
-  color: #dc3545; /* vermelho */
-}
-
-/* Container de ativos */
-.ativos-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ativo {
+/* Cabeçalho */
+header {
   background-color: #ffffff;
-  padding: 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-bottom: 2px solid #e0e0e0;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.ativo-nome {
-  font-size: 1.1em;
+.header-container h1 {
+  font-size: 1.8rem;
+  color: #2693dc;
+}
+
+.login-section a {
+  color: #2693dc;
   font-weight: bold;
+  text-decoration: none;
 }
 
-.ativo-valor {
-  font-size: 1em;
-  margin-top: 4px;
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ADS */
+.ads-section {
+  grid-column: span 2;
+  background-color: #eef6fb;
+  padding: 15px;
+  border: 1px solid #cde4f4;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.ads-container {
+  display: flex;
+  gap: 10px;
+}
+
+.ad {
+  flex: 1;
+  background-color: #d9ecfb;
+  border: 1px solid #9cccf2;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #0e6ba8;
+}
+
+/* Tabela de ações */
+.acoes-section {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.acoes-section h2 {
+  color: #2693dc;
+  margin-bottom: 10px;
+}
+
+.acoes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.acoes-table th {
+  background-color: #dff0fb;
+  color: #0d5f9a;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #b0d8f3;
+}
+
+.acoes-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
 }
 
 /* Gráfico */
-.grafico-container {
-  width: 100%;
-  overflow-x: auto;
-  margin-top: 16px;
+canvas {
+  width: 100% !important;
+  max-height: 200px;
+  margin-top: 10px;
 }
 
-/* Tabela */
-.tabela-ativos {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 16px;
+/* Chat */
+.chat-section {
   background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.tabela-ativos th, .tabela-ativos td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+.chat-section h2 {
+  color: #2693dc;
+  margin-bottom: 10px;
 }
 
-.tabela-ativos th {
-  background-color: #eaf6ff;
-  font-weight: bold;
+#chat-box {
+  height: 150px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+  background: #fafafa;
+  margin-bottom: 10px;
+}
+
+#chat-input {
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.chat-section button {
+  padding: 8px 10px;
+  background-color: #2693dc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Notícias */
+.noticias-section {
+  grid-column: span 2;
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.noticias-section h2 {
+  color: #2693dc;
+  margin-bottom: 10px;
+}
+
 .noticias-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
 }
 
 .noticia {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: #ffffff;
+  background-color: #f0f8ff;
   padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.noticia-imagem {
-  width: 100px;
-  height: 60px;
-  object-fit: cover;
+  border: 1px solid #c5e0f5;
   border-radius: 6px;
+  text-align: center;
 }
 
-.noticia-titulo {
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
-  flex: 1;
+.noticia img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
 }
 
-.noticia-titulo:hover {
-  text-decoration: underline;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .noticia {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .noticia-imagem {
-    width: 100%;
-    height: auto;
-  }
-
-  .tabela-ativos th, .tabela-ativos td {
-    font-size: 0.9em;
-  }
-}
-
-@media (max-width: 480px) {
-  .titulo-secao {
-    font-size: 1.4em;
-  }
-
-  button, .botao {
-    width: 100%;
-  }
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-size: 0.85rem;
+  margin-top: 30px;
 }
