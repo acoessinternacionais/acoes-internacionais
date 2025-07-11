@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,186 +6,178 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background-color: #f9f9f9;
   color: #333;
-  line-height: 1.5;
-  padding: 20px;
+  padding: 0;
 }
 
 /* Cabeçalho */
 header {
-  background-color: #ffffff;
+  background-color: #fff;
   border-bottom: 2px solid #e0e0e0;
-  padding: 15px 20px;
-  margin-bottom: 20px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header-container h1 {
-  font-size: 1.8rem;
+header h1 {
   color: #2693dc;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
-.login-section a {
+header a {
   color: #2693dc;
   font-weight: bold;
   text-decoration: none;
 }
 
+/* Container principal */
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  max-width: 500px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
-/* ADS */
+/* Espaço de ADS */
 .ads-section {
-  grid-column: span 2;
   background-color: #eef6fb;
+  border: 2px dashed #aad3f3;
   padding: 15px;
-  border: 1px solid #cde4f4;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.ads-container {
-  display: flex;
-  gap: 10px;
-}
-
-.ad {
-  flex: 1;
-  background-color: #d9ecfb;
-  border: 1px solid #9cccf2;
-  padding: 10px;
   text-align: center;
-  border-radius: 5px;
   font-weight: bold;
-  color: #0e6ba8;
+  color: #0a71b8;
+  border-radius: 8px;
 }
 
 /* Tabela de ações */
 .acoes-section {
   background-color: #fff;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.acoes-section h2 {
-  color: #2693dc;
-  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .acoes-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.acoes-table th {
-  background-color: #dff0fb;
-  color: #0d5f9a;
-  padding: 8px;
-  font-size: 0.9rem;
-  border: 1px solid #b0d8f3;
-}
-
-.acoes-table td {
-  padding: 8px;
-  border: 1px solid #ccc;
-  text-align: center;
-}
-
-/* Gráfico */
-canvas {
-  width: 100% !important;
-  max-height: 200px;
   margin-top: 10px;
 }
 
-/* Chat */
-.chat-section {
-  background-color: #fff;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
+.acoes-table th {
+  background-color: #d8ecfb;
+  color: #1775bb;
+  padding: 8px;
+  border: 1px solid #b0d8f3;
+  font-size: 0.85rem;
 }
 
+.acoes-table td {
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+}
+
+/* Chat e Gráfico lado a lado */
+.chat-grafico-container {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-section, .grafico-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Chat */
 .chat-section h2 {
   color: #2693dc;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  margin-bottom: 8px;
 }
 
 #chat-box {
-  height: 150px;
-  border: 1px solid #ccc;
-  padding: 10px;
+  height: 100px;
   overflow-y: auto;
-  background: #fafafa;
-  margin-bottom: 10px;
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  padding: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
 }
 
 #chat-input {
-  padding: 8px;
-  border: 1px solid #aaa;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #bbb;
   border-radius: 4px;
   margin-bottom: 5px;
 }
 
 .chat-section button {
-  padding: 8px 10px;
-  background-color: #2693dc;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  background: #2693dc;
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+}
+
+/* Gráfico */
+canvas {
+  width: 100% !important;
+  height: 120px !important;
 }
 
 /* Notícias */
 .noticias-section {
-  grid-column: span 2;
-  background-color: #ffffff;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background-color: #fff;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .noticias-section h2 {
   color: #2693dc;
+  font-size: 1rem;
   margin-bottom: 10px;
 }
 
 .noticias-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .noticia {
   background-color: #f0f8ff;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #c5e0f5;
-  border-radius: 6px;
+  border-radius: 5px;
   text-align: center;
 }
 
 .noticia img {
   max-width: 100%;
-  height: auto;
   border-radius: 5px;
 }
 
-/* Rodapé */
-footer {
+.botao-noticias {
+  margin-top: 10px;
+  background-color: #2693dc;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-radius: 4px;
   text-align: center;
-  padding: 20px;
-  color: #999;
-  font-size: 0.85rem;
-  margin-top: 30px;
+  display: inline-block;
 }
