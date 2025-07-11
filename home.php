@@ -1,77 +1,105 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['usuario']);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>AÇÕES INTERNACIONAIS</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ações Internacionais</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <h1>AÇÕES INTERNACIONAIS</h1>
-      <div class="login-section">
-        <?php
-        session_start();
-        if (isset($_SESSION['usuario'])) {
-          echo '<a href="logout.php">Logout</a>';
-        } else {
-          echo '<a href="login.php">Login</a>';
-        }
-        ?>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <section class="ads-section">
-      <h2>ADS</h2>
-      <div class="ads-container">
-        <div class="ad">Anúncio 1</div>
-        <div class="ad">Anúncio 2</div>
-        <div class="ad">Anúncio 3</div>
-      </div>
-    </section>
+<header>
+  <h1>AÇÕES INTERNACIONAIS</h1>
+  <a href="<?= $isLoggedIn ? 'logout.php' : 'login.php' ?>">
+    <?= $isLoggedIn ? 'Logout' : 'Login' ?>
+  </a>
+</header>
 
-    <section class="acoes-section">
-      <h2>Ações</h2>
-      <table class="acoes-table">
-        <thead>
-          <tr>
-            <th>Ação</th>
-            <th>Preço</th>
-            <th>Dividendo</th>
-            <th>Variação</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-ativos">
-          <!-- Conteúdo será inserido por ativos.js -->
-        </tbody>
-      </table>
-      <canvas id="graficoAcoes" width="400" height="200"></canvas>
-    </section>
+<main>
 
-    <section class="chat-section">
+  <!-- Área de anúncios -->
+  <section class="ads-section">
+    ADS
+  </section>
+
+  <!-- Tabela de Ações -->
+  <section class="acoes-section">
+    <table class="acoes-table">
+      <thead>
+        <tr>
+          <th>Ação</th>
+          <th>Preço</th>
+          <th>Dividendo</th>
+          <th>Vari.</th>
+        </tr>
+      </thead>
+      <tbody id="ativos-tabela">
+        <!-- Dados serão preenchidos via ativos.js -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Chat e Gráfico -->
+  <section class="chat-grafico-container">
+
+    <div class="chat-section">
       <h2>Chat</h2>
       <div id="chat-box"></div>
-      <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+      <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
       <button onclick="enviarMensagem()">Enviar</button>
-    </section>
+    </div>
 
-    <section class="noticias-section">
-      <h2>Notícias</h2>
-      <div id="noticias-container" class="noticias-container">
-        <!-- Notícias com imagens via noticias.js -->
-      </div>
-    </section>
-  </main>
+    <div class="grafico-section">
+      <canvas id="grafico-dividendos"></canvas>
+    </div>
 
-  <footer>
-    <p>&copy; 2025 Ações Internacionais</p>
-  </footer>
+  </section>
 
-  <script src="ativos.js"></script>
-  <script src="chat.js"></script>
-  <script src="noticias.js"></script>
+  <!-- Seção de Notícias -->
+  <section class="noticias-section">
+    <h2>Notícias</h2>
+    <div class="noticias-container" id="noticias-container">
+      <!-- Notícias com imagem carregadas via noticias.js -->
+    </div>
+    <button class="botao-noticias">Mais Notícias</button>
+  </section>
+
+</main>
+
+<script src="ativos.js"></script>
+<script src="chat.js"></script>
+<script src="noticias.js"></script>
+<script>
+  // Gráfico exemplo (não usa chat.js)
+  const ctx = document.getElementById('grafico-dividendos');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+      datasets: [{
+        label: 'Dividendos',
+        data: [0.3, 0.5, 0.4, 0.7, 0.6],
+        borderColor: '#2693dc',
+        tension: 0.3,
+        fill: false
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
