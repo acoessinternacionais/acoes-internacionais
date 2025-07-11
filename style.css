@@ -1,39 +1,172 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #f4f4f4;
-}
-h1, h2 {
+  background-color: #f3f6f9;
   color: #333;
+  line-height: 1.6;
+  padding: 16px;
 }
-table {
+
+/* Fonte principal para títulos */
+h1, h2, h3 {
+  font-family: Impact, sans-serif;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+/* Seções */
+section {
+  margin-bottom: 32px;
+}
+
+.titulo-secao {
+  font-size: 1.8em;
+  border-left: 5px solid #00aaff;
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+
+/* Botões */
+button, .botao {
+  background-color: #a0d8ef;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .botao:hover {
+  background-color: #7ecdf0;
+}
+
+/* Indicadores de variação */
+.variacao-positiva {
+  color: #28a745; /* verde */
+}
+
+.variacao-negativa {
+  color: #dc3545; /* vermelho */
+}
+
+/* Container de ativos */
+.ativos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ativo {
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ativo-nome {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.ativo-valor {
+  font-size: 1em;
+  margin-top: 4px;
+}
+
+/* Gráfico */
+.grafico-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+/* Tabela */
+.tabela-ativos {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  margin-bottom: 20px;
+  margin-top: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
 }
-table th, table td {
-  padding: 8px;
-  border: 1px solid #ccc;
+
+.tabela-ativos th, .tabela-ativos td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
   text-align: left;
 }
-.abas {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.abas button {
-  padding: 6px 12px;
-  border: none;
-  background: #1976d2;
-  color: white;
+
+.tabela-ativos th {
+  background-color: #eaf6ff;
   font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
 }
-.aba {
-  display: none;
+
+/* Notícias */
+.noticias-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.aba.ativa {
-  display: block;
+
+.noticia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.noticia-imagem {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.noticia-titulo {
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  flex: 1;
+}
+
+.noticia-titulo:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .noticia {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .noticia-imagem {
+    width: 100%;
+    height: auto;
+  }
+
+  .tabela-ativos th, .tabela-ativos td {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-secao {
+    font-size: 1.4em;
+  }
+
+  button, .botao {
+    width: 100%;
+  }
 }
