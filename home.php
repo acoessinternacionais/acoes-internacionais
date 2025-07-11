@@ -1,78 +1,83 @@
+<?php
+// home.php – Página principal do site
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Home - Painel de Ativos</title>
-  <style>
-    body {
-      font-family: Impact, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    header {
-      background-color: #1e90ff;
-      color: white;
-      padding: 20px 0;
-      font-size: 28px;
-      border-bottom: 5px solid #1473cc;
-    }
-
-    main {
-      margin-top: 40px;
-    }
-
-    .nav-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .nav-buttons a {
-      background-color: #add8e6;
-      color: black;
-      text-decoration: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      font-size: 18px;
-      transition: background-color 0.3s;
-    }
-
-    .nav-buttons a:hover {
-      background-color: #9ccbe0;
-    }
-
-    footer {
-      margin-top: 60px;
-      padding: 15px;
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Financeiro</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <header>
-    Painel de Ativos Internacionais
+    <h1 class="titulo-secao">Dashboard Financeiro</h1>
   </header>
 
   <main>
-    <h2>Bem-vindo!</h2>
-    <p>Escolha uma das opções abaixo para navegar pelo site:</p>
 
-    <div class="nav-buttons">
-      <a href="painel-ativos/index.html">Ver Painel de Ativos</a>
-      <a href="noticias.php">Notícias</a>
-      <a href="chat.php">Chat</a>
-      <a href="grupo_video.php">Vídeo Conferência</a>
-    </div>
+    <!-- Seção de Ativos -->
+    <section id="ativos">
+      <h2 class="titulo-secao">Ativos em Tempo Real</h2>
+      <div class="ativos-container" id="ativos-container">
+        <!-- Ativos carregados dinamicamente via ativos.js -->
+        <p>Carregando ativos...</p>
+      </div>
+    </section>
+
+    <!-- Gráfico de Ativos -->
+    <section id="grafico">
+      <h2 class="titulo-secao">Evolução de Preços</h2>
+      <div class="grafico-container">
+        <canvas id="graficoCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Tabela de Ativos -->
+    <section id="tabela">
+      <h2 class="titulo-secao">Tabela de Cotações</h2>
+      <table class="tabela-ativos" id="tabela-ativos">
+        <thead>
+          <tr>
+            <th>Ativo</th>
+            <th>Valor</th>
+            <th>Variação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Conteúdo preenchido via ativos.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Notícias Recentes -->
+    <section id="noticias">
+      <h2 class="titulo-secao">Notícias Recentes</h2>
+      <div class="noticias-container" id="noticias-container">
+        <p>Carregando notícias...</p>
+      </div>
+    </section>
+
+    <!-- Chat -->
+    <section id="chat">
+      <h2 class="titulo-secao">Chat</h2>
+      <div id="chat-box" style="background:#fff; padding:10px; border-radius:8px; height:300px; overflow-y:auto;">
+        <!-- Mensagens do chat -->
+      </div>
+      <form id="chat-form" style="margin-top:10px; display:flex; gap:8px;">
+        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." style="flex:1; padding:8px;" />
+        <button type="submit" class="botao">Enviar</button>
+      </form>
+    </section>
+
   </main>
 
-  <footer>
-    &copy; <?php echo date("Y"); ?> - Seu Nome ou Projeto
-  </footer>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/ativos.js"></script>
+  <script src="js/noticias.js"></script>
+  <script src="js/chat.js"></script>
+
 </body>
 </html>
