@@ -1,5 +1,5 @@
 <?php
-// home.php – Página principal do site
+// home.php – Página principal do dashboard financeiro
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,24 +17,23 @@
 
   <main>
 
-    <!-- Seção de Ativos -->
+    <!-- Ativos -->
     <section id="ativos">
       <h2 class="titulo-secao">Ativos em Tempo Real</h2>
       <div class="ativos-container" id="ativos-container">
-        <!-- Ativos carregados dinamicamente via ativos.js -->
         <p>Carregando ativos...</p>
       </div>
     </section>
 
-    <!-- Gráfico de Ativos -->
+    <!-- Gráfico -->
     <section id="grafico">
-      <h2 class="titulo-secao">Evolução de Preços</h2>
+      <h2 class="titulo-secao">Gráfico de Variação</h2>
       <div class="grafico-container">
-        <canvas id="graficoCanvas"></canvas>
+        <canvas id="graficoCanvas" width="400" height="200"></canvas>
       </div>
     </section>
 
-    <!-- Tabela de Ativos -->
+    <!-- Tabela -->
     <section id="tabela">
       <h2 class="titulo-secao">Tabela de Cotações</h2>
       <table class="tabela-ativos" id="tabela-ativos">
@@ -46,12 +45,12 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Conteúdo preenchido via ativos.js -->
+          <!-- Dados carregados via ativos.js -->
         </tbody>
       </table>
     </section>
 
-    <!-- Notícias Recentes -->
+    <!-- Notícias -->
     <section id="noticias">
       <h2 class="titulo-secao">Notícias Recentes</h2>
       <div class="noticias-container" id="noticias-container">
@@ -62,11 +61,9 @@
     <!-- Chat -->
     <section id="chat">
       <h2 class="titulo-secao">Chat</h2>
-      <div id="chat-box" style="background:#fff; padding:10px; border-radius:8px; height:300px; overflow-y:auto;">
-        <!-- Mensagens do chat -->
-      </div>
-      <form id="chat-form" style="margin-top:10px; display:flex; gap:8px;">
-        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." style="flex:1; padding:8px;" />
+      <div id="chat-box" class="chat-box"></div>
+      <form id="chat-form" class="chat-form">
+        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
         <button type="submit" class="botao">Enviar</button>
       </form>
     </section>
