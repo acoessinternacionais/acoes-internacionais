@@ -1,5 +1,6 @@
 <?php
-// home.php – Página principal do dashboard financeiro
+session_start();
+$usuario_logado = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,11 +14,25 @@
 
   <header>
     <h1 class="titulo-secao">Dashboard Financeiro</h1>
+
+    <!-- Área de Login -->
+    <div id="login-area">
+      <?php if ($usuario_logado): ?>
+        <span class="usuario-logado">👤 Olá, <?= htmlspecialchars($usuario_logado) ?></span>
+        <a href="logout.php" class="botao">Sair</a>
+      <?php else: ?>
+        <form action="login.php" method="post" id="form-login">
+          <input type="text" name="usuario" placeholder="Usuário" required />
+          <input type="password" name="senha" placeholder="Senha" required />
+          <button type="submit" class="botao">Entrar</button>
+        </form>
+      <?php endif; ?>
+    </div>
   </header>
 
   <main>
 
-    <!-- Ativos -->
+    <!-- Seção de Ativos -->
     <section id="ativos">
       <h2 class="titulo-secao">Ativos em Tempo Real</h2>
       <div class="ativos-container" id="ativos-container">
@@ -25,15 +40,15 @@
       </div>
     </section>
 
-    <!-- Gráfico -->
+    <!-- Gráfico de Ativos -->
     <section id="grafico">
-      <h2 class="titulo-secao">Gráfico de Variação</h2>
+      <h2 class="titulo-secao">Evolução de Preços</h2>
       <div class="grafico-container">
-        <canvas id="graficoCanvas" width="400" height="200"></canvas>
+        <canvas id="graficoCanvas"></canvas>
       </div>
     </section>
 
-    <!-- Tabela -->
+    <!-- Tabela de Ativos -->
     <section id="tabela">
       <h2 class="titulo-secao">Tabela de Cotações</h2>
       <table class="tabela-ativos" id="tabela-ativos">
@@ -45,12 +60,12 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Dados carregados via ativos.js -->
+          <!-- Conteúdo preenchido via ativos.js -->
         </tbody>
       </table>
     </section>
 
-    <!-- Notícias -->
+    <!-- Notícias Recentes -->
     <section id="noticias">
       <h2 class="titulo-secao">Notícias Recentes</h2>
       <div class="noticias-container" id="noticias-container">
@@ -61,9 +76,11 @@
     <!-- Chat -->
     <section id="chat">
       <h2 class="titulo-secao">Chat</h2>
-      <div id="chat-box" class="chat-box"></div>
-      <form id="chat-form" class="chat-form">
-        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
+      <div id="chat-box" style="background:#fff; padding:10px; border-radius:8px; height:300px; overflow-y:auto;">
+        <!-- Mensagens do chat -->
+      </div>
+      <form id="chat-form" style="margin-top:10px; display:flex; gap:8px;">
+        <input type="text" id="chat-input" placeholder="Digite sua mensagem..." style="flex:1; padding:8px;" />
         <button type="submit" class="botao">Enviar</button>
       </form>
     </section>
