@@ -1,0 +1,35 @@
+
+# Ignora arquivos compactados
+*.zip
+*.tar.gz
+*.rar
+
+# Ignora backups e temporários
+*.bak
+*.tmp
+*.swp
+*~
+
+# Ignora diretórios do sistema e IDEs
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ignora dependências locais e arquivos de cache
+node_modules/
+vendor/
+.env
+.env.local
+
+# Ignora arquivos de log
+*.log
+
+# Ignora arquivos de build ou deploy temporários
+/build/
+/dist/
+/tmp/
+/cache/
+
+# Ignora arquivos específicos para Render ou Docker se necessário
+docker-compose.override.yml
