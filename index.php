@@ -1,1 +1,4 @@
-// Conteúdo exemplo para index.php
+<?php
+// Redireciona para o painel de ativos
+header("Location: painel-ativos/index.html");
+exit;
