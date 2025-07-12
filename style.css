@@ -23,10 +23,15 @@ header {
 }
 
 header h1 {
-  color: blue;
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
+    color: blue;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center; /* Centraliza o texto *dentro* do h1 */
+
+    /* Para centralizar o próprio elemento h1 horizontalmente */
+    width: fit-content; /* Faz com que o h1 tenha apenas a largura do seu conteúdo */
+    margin-left: auto;   /* Distribui o espaço restante para a esquerda */
+    margin-right: auto;  /* Distribui o espaço restante para a direita */
 }
 
 header a {
