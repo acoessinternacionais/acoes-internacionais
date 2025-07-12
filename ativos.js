@@ -23,7 +23,7 @@ async function fetchData(symbol) {
     const data = await res.json();
     const meta = data["Meta Data"];
     const lastRefreshed = meta && meta["3. Last Refreshed"];
-    const series = data["Time Series (5min)"];
+    const series = data["Time Series (3sec)"];
     const latest = series && series[lastRefreshed];
 
     return {
