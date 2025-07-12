@@ -28,6 +28,8 @@ $isLoggedIn = isset($_SESSION['usuario']);
     ADS
   </section>
 
+  <?php include 'render_layout_blocks.php'; ?>
+
   <!-- Tabela de Ações -->
   <section class="acoes-section">
     <table class="acoes-table">
