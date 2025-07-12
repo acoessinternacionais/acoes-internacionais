@@ -23,8 +23,10 @@ header {
 }
 
 header h1 {
-  text-align: center; color: blue;
-  font-size: 2.5rem; font-weight: 700;
+  text-align: center; 
+  color: blue;
+  font-size: 2.5rem; 
+  font-weight: 700;
 }
 
 header a {
