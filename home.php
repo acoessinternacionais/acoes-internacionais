@@ -8,14 +8,14 @@ $isLoggedIn = isset($_SESSION['usuario']);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ações3 Internacionais</title>
+  <title>Ações Internacionais</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <header>
-  <h1>AÇÕES2 INTERNACIONAIS</h1>
+  <h1>AÇÕES INTERNACIONAIS</h1>
   <a href="<?= $isLoggedIn ? 'logout.php' : 'login.php' ?>">
     <?= $isLoggedIn ? 'Logout' : 'Login' ?>
   </a>
