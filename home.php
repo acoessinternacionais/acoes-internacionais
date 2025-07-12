@@ -15,7 +15,7 @@ $isLoggedIn = isset($_SESSION['usuario']);
 <body>
 
 <header>
-  <h1>AÇÕES INTERNACIONAIS</h1>
+  <h1>AÇÕES1 INTERNACIONAIS</h1>
   <a href="<?= $isLoggedIn ? 'logout.php' : 'login.php' ?>">
     <?= $isLoggedIn ? 'Logout' : 'Login' ?>
   </a>
