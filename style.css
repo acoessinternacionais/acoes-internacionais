@@ -11,6 +11,10 @@ body {
   color: #333;
   padding: 0;
 }
+title {
+  background-color: #f9f9f9;
+  color: #333; 
+}
 
 /* Cabeçalho */
 header {
