@@ -1,49 +1,65 @@
-// ativos.js
-// Responsável por buscar e exibir dados de ações no painel
+// js/ativos.js
 
-document.addEventListener("DOMContentLoaded", function () {
-  const ativos = [
-    { ticker: "AAPL", preco: 212.41, variacao: 1.27, percentual: 0.6015 },
-    { ticker: "MSFT", preco: 501.48, variacao: -2.03, percentual: -0.4032 },
-    { ticker: "GOOGL", preco: 177.62, variacao: 1.0, percentual: 0.5662 },
-    { ticker: "AMZN", preco: 222.26, variacao: -0.28, percentual: -0.1258 },
-    { ticker: "PETR4.SA", preco: 32.24, variacao: -0.28, percentual: -0.8610 },
-    { ticker: "VALE3.SA", preco: 55.28, variacao: 0.70, percentual: 1.2825 }
-  ];
+const apiKey = "af60372cadbd471c966a1fe20a74de94";
+const symbols = {
+  "acoes": ["PETR4", "ITUB4", "VALE3", "BBDC4",
+            "ABEV3", "BBAS3", "WEGE3", "B3SA3",
+            "ITSA4", "SUZB3", "ELET3", "PRIO3",
+            "RENT3", "BPAC11", "RDOR3", "LREN3",
+            "KLBN11", "FLRY3", "MGLU3", "RADL3",
+            "ENBR3", "CSAN3", "RAIL3", "CMIG4",
+            "EQTL3", "HAPV3", "COGN3", "GOAU4",
+            "GGBR4", "SBSP3"],
+  "dividendos": ["T", "VZ"],
+  "etfs": ["SPY", "IVV"],
+  "fiis": ["HGLG11.SA", "KNRI11.SA"]
+};
 
-  const tabela = document.getElementById("tabela-ativos");
+async function fetchData(symbol) {
+  try {
+    const res = await fetch(
+      `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`
+    );
+    const data = await res.json();
+    const meta = data["Meta Data"];
+    const lastRefreshed = meta && meta["3. Last Refreshed"];
+    const series = data["Time Series (5min)"];
+    const latest = series && series[lastRefreshed];
 
-  ativos.forEach(ativo => {
-    const linha = document.createElement("tr");
-
-    const celTicker = document.createElement("td");
-    celTicker.textContent = ativo.ticker;
-
-    const celPreco = document.createElement("td");
-    celPreco.textContent = `R$ ${ativo.preco.toFixed(2)}`;
-
-    const celSeta = document.createElement("td");
-    celSeta.innerHTML = getSetaHTML(ativo.variacao);
-
-    const celVariacao = document.createElement("td");
-    celVariacao.textContent = `${ativo.variacao.toFixed(2)} (${ativo.percentual.toFixed(4)}%)`;
-    celVariacao.style.color = ativo.variacao >= 0 ? "green" : "red";
-
-    linha.appendChild(celTicker);
-    linha.appendChild(celPreco);
-    linha.appendChild(celSeta);
-    linha.appendChild(celVariacao);
-
-    tabela.appendChild(linha);
-  });
-
-  function getSetaHTML(valor) {
-    if (valor > 0) {
-      return `<span style="color: green;">▲</span>`;
-    } else if (valor < 0) {
-      return `<span style="color: red;">▼</span>`;
-    } else {
-      return `--`;
-    }
+    return {
+      symbol,
+      price: latest ? parseFloat(latest["1. open"]).toFixed(2) : "-",
+      timestamp: lastRefreshed || ""
+    };
+  } catch (err) {
+    console.error("Erro ao buscar dados para", symbol, err);
+    return { symbol, price: "Erro", timestamp: "" };
   }
-});
+}
+
+async function atualizarTabela(tipo) {
+  const container = document.getElementById(`tabela-${tipo}`);
+  container.innerHTML = "<tr><th>Ativo</th><th>Preço</th><th>Atualizado</th></tr>";
+
+  for (const s of symbols[tipo]) {
+    const dados = await fetchData(s);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${dados.symbol}</td>
+      <td>R$ ${dados.price}</td>
+      <td>${dados.timestamp}</td>
+    `;
+    container.appendChild(tr);
+  }
+}
+
+function atualizarTudo() {
+  atualizarTabela("acoes");
+  atualizarTabela("dividendos");
+  atualizarTabela("etfs");
+  atualizarTabela("fiis");
+}
+
+// Atualiza a cada 3 segundos
+atualizarTudo();
+setInterval(atualizarTudo, 3 * 1000);
