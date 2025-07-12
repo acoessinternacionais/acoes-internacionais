@@ -1,0 +1,34 @@
+
+body {
+  font-family: Impact, sans-serif;
+  background-color: #eef7fc;
+  padding: 20px;
+}
+h1 {
+  color: #003366;
+}
+section {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+button {
+  background: #a4d4f4;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+#blocos-layout {
+  display: flex;
+  gap: 10px;
+}
+.bloco {
+  background: #e6f1fa;
+  padding: 10px;
+  border: 1px dashed #007acc;
+  border-radius: 5px;
+  cursor: move;
+}
