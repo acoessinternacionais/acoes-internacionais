@@ -28,9 +28,10 @@ header {
 }
 
 header h1 {
-  color: #2693dc;
+  color: black;
   font-size: 1.4rem;
   font-weight: 700;
+  align-items: center;
 }
 
 header a {
